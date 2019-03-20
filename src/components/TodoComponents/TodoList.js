@@ -56,7 +56,7 @@ class TodoList extends React.Component {
     };
 
     this.setState({
-      taskList: [this.state.taskList, newItem]
+      taskList: [...this.state.taskList, newItem]
     });
   };
 
