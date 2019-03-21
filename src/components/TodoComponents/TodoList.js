@@ -5,7 +5,7 @@ import React from 'react';
 
 import ToDoForm from './TodoForm'
 import ListItem from './Todo'
-import './toDoList.css'
+import './TodoList.css'
 
 
 let taskList = [
@@ -59,25 +59,30 @@ class TodoList extends React.Component {
   };
 
   toggleCompleted = event => {
+    let exchange = this.state.taskList.map(task => {
+      if (task.id === event) {
+        task.completed = !task.completed;
+        return task
+      }
+      else {
+        return task
+      };
+    })
     this.setState({
-      taskList: this.state.taskList.map(task => {
-        console.log(task)
-        if (task.id === event) {
-          task.completed = !task.completed;
-          return task
-        }
-        else {
-          return task
-        };
-      })
-   })    
+      taskList: exchange     
+   })   
   }
 
   removeComplete = event => {
     event.preventDefault();
 
-    // taskList
-
+    let exchange = this.state.taskList.filter(task => 
+      task.completed === false      
+    )
+ 
+    this.setState({
+      taskList: exchange
+    })
 
   }
 
