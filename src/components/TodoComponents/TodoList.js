@@ -5,9 +5,10 @@ import React from 'react';
 
 import ToDoForm from './TodoForm'
 import ListItem from './Todo'
+import './toDoList.css'
 
 
-let listItem = [
+let taskList = [
   {
     task: 'Example',
     id: 123456789,
@@ -25,10 +26,8 @@ class TodoList extends React.Component {
     super();
 
     this.state = {
-      taskList: listItem,
+      taskList,
       task: '',
-      id: Date.now(),
-      completed: false
     };
   };
 
@@ -40,34 +39,55 @@ class TodoList extends React.Component {
     });
   };
 
-  // removeCompleted = event => {
-  //   this.setState({
-
-  //   })
-  // }
-
   updateList = event => {
     event.preventDefault();
-    console.log('page')
+
     let newItem = {
       task: this.state.task,
-      id: this.state.id,
-      completed: this.state.completed
+      id: Date.now(),
+      completed: false
     };
 
+    let exchange = this.state.taskList.slice();
+    
+    exchange.push(newItem);
+
     this.setState({
-      taskList: [...this.state.taskList, newItem]
+      taskList: exchange,
+      task:''
     });
   };
 
+  toggleCompleted = event => {
+    this.setState({
+      taskList: this.state.taskList.map(task => {
+        console.log(task)
+        if (task.id === event) {
+          task.completed = !task.completed;
+          return task
+        }
+        else {
+          return task
+        };
+      })
+   })    
+  }
+
+  removeComplete = event => {
+    event.preventDefault();
+
+    // taskList
+
+
+  }
 
   render() {
     return (
       <div>
         <h1>To Do List Below:</h1>
         <div className='list'>
-          {this.state.taskList.map((toDoList, index) => (
-            <ListItem key={index} toDoProp={toDoList} />
+          {this.state.taskList.map((toDoList) => (
+            <ListItem key={toDoList.id} toDoProp={toDoList} toggleCompleted={this.toggleCompleted} />
           ))} 
         </div>
 
@@ -76,8 +96,9 @@ class TodoList extends React.Component {
           id={this.state.id}
           completed={this.state.completed}
           eventChanges={this.eventChanges}
+          // toggleCompleted={this.toggleCompleted}
           updateList={this.updateList}
-          // removeCompleted={this.removeCompleted}
+          removeComplete={this.removeComplete}
         />
       </div>
     )
