@@ -4,10 +4,10 @@ import './Todo.css'
 
 function ListItem(props) {
   return (
-    <div className='list-items'>
+    <div className={`list-items${props.toDoProp.completed ? ' completed' : ''}`} onClick={() => props.toggleCompleted(props.toDoProp.id)}>
       <p>{props.toDoProp.task}</p>
-      {/* {props.toDoProp.id}
-      {props.toDoProp.completed} */}
+      {/* {props.toDoProp.id} */}
+      {/* {props.toDoProp.completed} */}
     </div>
   )
 }

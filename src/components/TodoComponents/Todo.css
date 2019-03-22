@@ -1,0 +1,10 @@
+.list-items {
+  border: 1px solid greenyellow;
+  margin: 5px;
+
+}
+
+.completed {
+  text-decoration-line: line-through;
+  border: 1px solid red;
+}
