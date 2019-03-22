@@ -1,0 +1,14 @@
+.container {
+width: 500px;
+display: flex;
+flex-direction: column;
+margin-left: 30%;
+}
+
+.container h1 {
+  text-align: right;
+}
+
+.form {
+ 
+}
